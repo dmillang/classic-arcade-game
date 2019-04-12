@@ -58,15 +58,55 @@ Enemy.prototype.render = function() {
 
 class Hero {
     constructor() {
-        this.x = 0;
-        this.y = 0;
+        // Fetch image to render from images folder
         this.sprite = 'images/char-boy.png';
+        // Set length of a horizontal move
+        this.step = 101;
+        // Set length of a vertical move
+        this.jump = 83;
+        // Set inital position
+        this.startX = this.step * 2;
+        this.startY = (this.jump * 5) - 40;
+        this.x = this.startX;
+        this.y = this.startY;
     }
 
     // Draw hero sprite on current x and y coord position
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
+
+    // Update hero's x and y property according to input
+    handleInput(input) {
+        switch(input) {
+            case 'up':
+                if (this.y > this.jump) {
+                    this.y -= this.jump;
+                }
+                break;
+            case 'down':
+                if (this.y < this.jump * 4) {
+                    this.y += this.jump;
+                }
+                break;
+            case 'left':
+                if (this.x > 0) {
+                    this.x -= this.step;
+                }
+                break;
+            case 'right':
+                if (this.x < this.step * 4) {
+                    this.x += this.step;
+                }
+                break;
+        }
+    }
+
+    /*
+     * Update hero's x and y property according to input
+     *
+     * @param {string} input - Direction to travel
+     */
 }
 
 const player = new Hero();
