@@ -1,60 +1,35 @@
 // Enemies our player must avoid
-var Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // PSEUDO-CODE
-    // x pos
-    // y pos
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';
-};
-
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
-
-    //PSEUDO-CODE
-    // If enemy is not passed boundry
-        // Move forward
-        // Increment x by speed * dt
-    // else
-        // Reset pos to start
-};
-
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
-
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
-
-// PSEUDO-CODE
-// Hero class
-    // Constructor
-        // Properties
-            // x pos
-            // y pos
-            // Sprite image
-        // Methods
-            // Update position
-                // Check collision here
-                    // Did player x and y collide with enemy?
-                // Check win here?
-                    // Did player x and y reach final tile?
-            // Render
-                // Draw player sprite on current x and y coord position
-            // Handle keyboard input
-                // Update player's x and y property according to input
-            // Reset Hero
-                // Set x and y to starting x and y
+// Convert function to an ES2015 class
+class Enemy {
+    constructor(x,y,speed) {
+        this.x = x;
+        this.y = y + 55;
+        this.speed = speed;
+        this.sprite = 'images/enemy-bug.png';
+        this.step = 101;
+        // Set up horizontal boundry
+        this.boundry = this.step * 5;
+        // Set reset position off bourd boundries
+        this.resetPos = -this.step;
+    }
+    // Update the enemy's position, required method for game
+    // Parameter: dt, a time delta between ticks
+    update(dt) {
+        // stop enemy after it passes the board boundry (so it gets hidden)
+        if(this.x < this.boundry) {
+            // Move forward
+            // Increment x by speed * dt
+            this.x += this.speed * dt;
+        } else {
+            // Reset position to resetPos
+            this.x = this.resetPos;
+        }
+    }
+    // Draw the enemy on the screen, required method for game
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+}
 
 class Hero {
     constructor() {
@@ -78,37 +53,45 @@ class Hero {
 
     // Update hero's x and y property according to input
     handleInput(input) {
+        // Use of a switch instead of a regular "if...else"
         switch(input) {
             case 'up':
+                // Prevent player from moving to the first row (water)
                 if (this.y > this.jump) {
                     this.y -= this.jump;
                 }
                 break;
             case 'down':
+                // Prevent player from moving down the board
                 if (this.y < this.jump * 4) {
                     this.y += this.jump;
                 }
                 break;
             case 'left':
+                // Prevent player from moving left of the board
                 if (this.x > 0) {
                     this.x -= this.step;
                 }
                 break;
             case 'right':
+            // Prevent player from moving right of the board
                 if (this.x < this.step * 4) {
                     this.x += this.step;
                 }
                 break;
         }
     }
-
-    /*
-     * Update hero's x and y property according to input
-     *
-     * @param {string} input - Direction to travel
-     */
 }
 
+// Initiate a bug1 object from class Enemy;
+const allEnemies = [];
+// Call 3 bug objects from Enemy object passing different values for 'x' and 'y' in each object to make them start at different positions
+const bug1 = new Enemy(-101, 0, 200);
+const bug2 = new Enemy(-101, 83, 300);
+const bug3 = new Enemy((-101*2.5), 83, 300);
+allEnemies.push(bug1,bug2,bug3);
+
+// Initiate a plater object from class Hero;
 const player = new Hero();
 
 
