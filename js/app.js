@@ -41,7 +41,7 @@ class Hero {
         this.jump = 83;
         // Set inital position
         this.startX = this.step * 2;
-        this.startY = (this.jump * 5) - 40;
+        this.startY = (this.jump * 4) + 55;
         this.x = this.startX;
         this.y = this.startY;
     }
@@ -79,6 +79,23 @@ class Hero {
                     this.x += this.step;
                 }
                 break;
+        }
+    }
+
+    // Reset hero
+    reset() {
+        // Set x and y to starting x and y
+        this.y = this.startY;
+        this.x = this.startX;
+    }
+
+    update() {
+        // Check if there is a collision with an enemy
+        for(let enemy of allEnemies) {
+            // Did player x and y collide with enemy?
+            if (this.y === enemy.y && (enemy.x + enemy.step/2 > this.x && enemy.x < this.x + this.step/2) ) {
+                this.reset();
+            }
         }
     }
 }
