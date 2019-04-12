@@ -56,6 +56,22 @@ Enemy.prototype.render = function() {
             // Reset Hero
                 // Set x and y to starting x and y
 
+class Hero {
+    constructor() {
+        this.x = 0;
+        this.y = 0;
+        this.sprite = 'images/char-boy.png';
+    }
+
+    // Draw hero sprite on current x and y coord position
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+}
+
+const player = new Hero();
+
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
