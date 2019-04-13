@@ -2,19 +2,17 @@
 
 ## Table of Contents
 
-- [Instructions](#instructions)
-- [Contributing](#contributing)
+- [Game Overview](#game%20overview)
+- [Game Logic](#game%20logic)
 
-## Instructions
+## Game Overview
 
-Use this [rubric](https://review.udacity.com/#!/rubrics/15/view) for self-checking your submission.
+The objective of this game is to reach the river, while avoiding collision with the three running bugs.
 
-Make sure the functions you write are **object-oriented** - either class functions (like `Player` and `Enemy`) or class prototype functions such as `Enemy.prototype.checkCollisions`. Also make sure that the keyword `this` is used appropriately within your class and class prototype functions to refer to the object the function is called upon.
+## Game Logic
 
-Your **README.md** file should be updated with instructions on both how to 1. Run and 2. Play your arcade game.
+You need to use the arrow keys to move around the board.
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+You will be teleported to the inital position if collide with a bug.
 
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+When you reach the rive a modal will appear with a reset button.
